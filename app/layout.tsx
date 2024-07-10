@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ConvexClerkProvider from "./providers/ConvexClerkProvider";
+import ConvexClerkProvider from "../providers/ConvexClerkProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ConvexClerkProvider>
+    <ConvexClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
           {children}
-        </ConvexClerkProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ConvexClerkProvider>
   );
 }
