@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import {  Manrope } from "next/font/google";
 import "./globals.css";
 import ConvexClerkProvider from "../providers/ConvexClerkProvider";
+import AudioProvider from "@/providers/AudioProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Podcast AI",
@@ -21,9 +22,11 @@ export default function RootLayout({
   return (
     <ConvexClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <AudioProvider>
+        <body className={manrope.className}>
           {children}
-        </body>
+          </body>
+        </AudioProvider>
       </html>
     </ConvexClerkProvider>
   );
