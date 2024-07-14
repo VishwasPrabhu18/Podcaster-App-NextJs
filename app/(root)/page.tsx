@@ -8,7 +8,7 @@ import React from 'react'
 
 const Home = () => {
 
-  const trendingPodcasts = useQuery(api.podcasts.getTrendingPodcasts);
+  const trendingPodcasts = useQuery(api.podcasts.getTrendingPodcasts);  
 
   return (
     <div className='mt-9 flex flex-col gap-9'>
