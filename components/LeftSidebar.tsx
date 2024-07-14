@@ -37,7 +37,8 @@ const LeftSidebar = () => {
 
         {
           sidebarLinks.map((link) => {
-            const isActive = (pathname === link.route || pathname.startsWith(`${link.route}/`)) && params === user?.id;
+            const isLoggedUser = params === user?.id
+            const isActive = (pathname === link.route || pathname.startsWith(`${link.route}/`)) && (link.route !== '/profile' || isLoggedUser);
             return (
               <Link
                 key={link.label}
