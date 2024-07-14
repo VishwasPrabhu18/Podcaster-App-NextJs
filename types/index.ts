@@ -50,14 +50,6 @@ export interface ProfilePodcastProps {
   listeners: number;
 }
 
-export type VoiceType =
-  | "alloy"
-  | "echo"
-  | "fable"
-  | "onyx"
-  | "nova"
-  | "shimmer";
-
 export interface GeneratePodcastProps {
   voiceType: string;
   setAudio: Dispatch<SetStateAction<string>>;

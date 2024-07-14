@@ -2,22 +2,28 @@
 
 import { sidebarLinks } from '@/constants'
 import { cn } from '@/lib/utils';
-import { SignedIn, SignedOut, useClerk } from '@clerk/nextjs';
+import { SignedIn, SignedOut, useClerk, useUser } from '@clerk/nextjs';
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react'
+import React, { use } from 'react'
 import { Button } from './ui/button';
+import { useAudio } from '@/providers/AudioProvider';
 
 const LeftSidebar = () => {
 
   const pathname = usePathname();
   const router = useRouter();
+  const params = pathname.split('/')[2];  
+
+  const { user } = useUser();  
 
   const { signOut } = useClerk();
 
+  const {audio} = useAudio()
+
   return (
-    <section className='left_sidebar'>
+    <section className={cn("left_sidebar h-[calc(100vh-5px)]", {"h-[calc(100vh-140px)]": audio?.audioUrl})}>
       <nav className='flex flex-col gap-6'>
         <Link href="/" className='flex cursor-pointer items-center gap-2 pb-10 max-lg:justify-center'>
           <Image
@@ -31,11 +37,11 @@ const LeftSidebar = () => {
 
         {
           sidebarLinks.map((link) => {
-            const isActive = pathname === link.route || pathname.startsWith(`${link.route}/`);
+            const isActive = (pathname === link.route || pathname.startsWith(`${link.route}/`)) && params === user?.id;
             return (
               <Link
                 key={link.label}
-                href={link.route}
+                href={link.route === '/profile' ? `/profile/${user?.id}` : link.route}
                 className={cn("flex gap-3 items-center py-4 max-lg:px-4 justify-center lg:justify-start", { "bg-nav-focus border-r-4 border-orange-1": isActive })}
               >
                 <Image
